@@ -1,59 +1,76 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Lensio — Event Photography CRM
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+An internal CRM for photography studios to manage leads, clients, events, bookings, tasks, invoices, and reports. Built for local/on-premise use with a clean desktop-first interface.
 
-## About Laravel
+## Tech Stack
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Backend:** Laravel 12, PHP 8.2+
+- **Frontend:** Blade, Bootstrap/Tailwind CSS
+- **Database:** MySQL / MariaDB
+- **Testing:** Pest
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Lead Management** — Pipeline tracking, staff assignment, follow-ups
+- **Client Management** — Convert leads to clients, full event history
+- **Event Management** — Event details, photographer/editor assignment, status tracking
+- **Packages & Pricing** — Photography packages with add-ons and custom pricing
+- **Quotations & Contracts** — Generate quotations, convert to bookings, track contract status
+- **Task & Workflow** — Pre-event, event-day, and post-event task management
+- **Invoicing & Payments** — Invoice generation, manual payment entry, payment status tracking
+- **Employee Management** — Staff records, salary tracking, payment history
+- **Equipment Tracking** — Equipment inventory and event assignment
+- **Reports & Dashboard** — Revenue summary, pending payments, event completion status
+- **Audit Logging** — Activity tracking across the system
+- **Role-Based Access** — Admin, Sales, Photographer, Editor roles
 
-## Learning Laravel
+## Getting Started
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### Requirements
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.2+
+- Composer
+- Node.js & npm
+- MySQL / MariaDB
 
-## Laravel Sponsors
+### Installation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+git clone <repo-url>
+cd lensio
+composer run setup
+```
 
-### Premium Partners
+The `setup` script handles dependencies, `.env` creation, key generation, migrations, and frontend build.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Development
 
-## Contributing
+```bash
+composer run dev
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Starts the Laravel server, queue worker, log watcher, and Vite dev server concurrently.
 
-## Code of Conduct
+### Testing
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer run test
+```
 
-## Security Vulnerabilities
+### Docker
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+See [DOCKER.md](DOCKER.md) for Docker-based setup instructions.
+
+## Project Scope
+
+This system is designed for **local/on-premise use only**. The following are intentionally out of scope:
+
+- Client portal
+- File/photo uploads or image storage
+- Online payment gateways
+- Mobile application
+- Cloud-specific infrastructure
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT
