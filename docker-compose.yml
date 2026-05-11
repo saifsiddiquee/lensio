@@ -1,0 +1,79 @@
+# =============================================================================
+# Lensio CRM — Docker Compose
+# Services: app (PHP-FPM + Nginx), postgres
+# =============================================================================
+
+services:
+
+  # ── Application (PHP 8.2 + Nginx) ─────────────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lensio_app
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:80"
+    environment:
+      APP_NAME: "${APP_NAME:-Lensio}"
+      APP_ENV: "${APP_ENV:-production}"
+      APP_KEY: "${APP_KEY}"
+      APP_DEBUG: "${APP_DEBUG:-false}"
+      APP_URL: "${APP_URL:-http://localhost:8080}"
+
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: "${DB_DATABASE:-lensio}"
+      DB_USERNAME: "${DB_USERNAME:-lensio}"
+      DB_PASSWORD: "${DB_PASSWORD:-secret}"
+
+      SESSION_DRIVER: database
+      CACHE_STORE: database
+      QUEUE_CONNECTION: database
+
+      LOG_CHANNEL: stderr
+      LOG_LEVEL: "${LOG_LEVEL:-error}"
+    volumes:
+      - app_storage:/var/www/html/storage
+      - app_bootstrap_cache:/var/www/html/bootstrap/cache
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - lensio
+
+  # ── PostgreSQL ─────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: lensio_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "${DB_DATABASE:-lensio}"
+      POSTGRES_USER: "${DB_USERNAME:-lensio}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD:-secret}"
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "${DB_EXTERNAL_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-lensio} -d ${DB_DATABASE:-lensio}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - lensio
+
+volumes:
+  postgres_data:
+    driver: local
+  app_storage:
+    driver: local
+  app_bootstrap_cache:
+    driver: local
+
+networks:
+  lensio:
+    driver: bridge

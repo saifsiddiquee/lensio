@@ -1,0 +1,52 @@
+# =============================================================================
+# .dockerignore — keeps the build context lean and secure
+# =============================================================================
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Environment files (never bake secrets into the image)
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+
+# Vendor (installed inside Docker)
+vendor/
+
+# Built assets (rebuilt inside Docker)
+public/build/
+public/hot
+
+# Laravel caches (generated at runtime)
+bootstrap/cache/*.php
+storage/framework/cache/
+storage/framework/sessions/
+storage/framework/views/
+storage/logs/
+
+# Tests
+tests/
+phpunit.xml
+.pest/
+
+# Dev tools
+.editorconfig
+.phpunit.result.cache
+.php-cs-fixer.cache
+
+# Docker compose and root Dockerfile (not needed in image)
+docker-compose*.yml
+Dockerfile
+
+# Docs
+docs/
+README.md
+CHANGELOG.md
+
+# macOS
+.DS_Store

@@ -1,0 +1,98 @@
+# =============================================================================
+# Lensio CRM — .gitignore
+# Laravel 12 + Vite + Docker + macOS/Windows/Linux
+# =============================================================================
+
+# ── Environment & Secrets ─────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+!.env.docker
+/auth.json
+/storage/*.key
+
+# ── PHP / Composer ────────────────────────────────────────────────────────────
+/vendor/
+/bootstrap/cache/*.php
+!bootstrap/cache/.gitignore
+
+# ── Node / NPM ────────────────────────────────────────────────────────────────
+/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ── Vite / Frontend Build ─────────────────────────────────────────────────────
+/public/build/
+/public/hot
+
+# ── Laravel Runtime ───────────────────────────────────────────────────────────
+/public/storage
+/storage/app/public/*
+!storage/app/public/.gitignore
+/storage/framework/cache/*
+!storage/framework/cache/.gitignore
+/storage/framework/sessions/*
+!storage/framework/sessions/.gitignore
+/storage/framework/testing/*
+!storage/framework/testing/.gitignore
+/storage/framework/views/*
+!storage/framework/views/.gitignore
+/storage/logs/*
+!storage/logs/.gitignore
+/storage/pail/
+
+# ── Testing ───────────────────────────────────────────────────────────────────
+.phpunit.result.cache
+/.phpunit.cache/
+/coverage/
+/.pest/
+
+# ── IDEs & Editors ────────────────────────────────────────────────────────────
+/.idea/
+/.vscode/
+/.fleet/
+/.nova/
+/.zed/
+/.phpactor.json
+*.swp
+*.swo
+*~
+
+# ── Operating Systems ─────────────────────────────────────────────────────────
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# ── Docker ────────────────────────────────────────────────────────────────────
+# Keep: Dockerfile, docker-compose.yml, docker/ configs
+# Ignore runtime/override files
+docker-compose.override.yml
+docker-compose.local.yml
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+
+# ── Misc Dev Tools ────────────────────────────────────────────────────────────
+Homestead.json
+Homestead.yaml
+.phpunit.result.cache
+.php-cs-fixer.cache
+.php_cs.cache
