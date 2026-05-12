@@ -15,18 +15,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    environment:
-      APP_NAME: "${APP_NAME:-Lensio}"
-      APP_ENV: "${APP_ENV:-production}"
-      APP_KEY: "${APP_KEY}"
-      APP_DEBUG: "${APP_DEBUG:-false}"
-
-      SESSION_DRIVER: database
-      CACHE_STORE: database
-      QUEUE_CONNECTION: database
-
-      LOG_CHANNEL: stderr
-      LOG_LEVEL: "${LOG_LEVEL:-error}"
+    env_file:
+      - .env
     volumes:
       - app_storage:/var/www/html/storage
       - app_bootstrap_cache:/var/www/html/bootstrap/cache
