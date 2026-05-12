@@ -12,12 +12,15 @@ services:
       dockerfile: Dockerfile
     container_name: lensio_app
     restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
     environment:
       APP_NAME: "${APP_NAME:-Lensio}"
       APP_ENV: "${APP_ENV:-production}"
       APP_KEY: "${APP_KEY}"
       APP_DEBUG: "${APP_DEBUG:-false}"
-      APP_URL: "${APP_URL:-http://localhost:8080}"
+      APP_URL: "${APP_URL:-https://lensio.saifsiddiquee.qzz.io}"
 
       DB_CONNECTION: pgsql
       DB_HOST: postgres
@@ -39,22 +42,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    networks:
-      - lensio
-
-  # ── Web Server (Nginx) ──────────────────────────────────────────────────
-  web:
-    image: nginx:alpine
-    container_name: lensio_nginx
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./:/var/www/html
-      - ./docker/nginx:/etc/nginx/conf.d
-    depends_on:
-      - app
     networks:
       - lensio
 
