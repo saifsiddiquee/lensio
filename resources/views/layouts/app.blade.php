@@ -279,6 +279,12 @@
             border: 1px solid rgba(244, 63, 94, 0.25);
         }
 
+        .role-badge.manager {
+            background: rgba(14, 165, 233, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(14, 165, 233, 0.25);
+        }
+
         .role-badge.sales {
             background: rgba(99, 102, 241, 0.15);
             color: #818cf8;
@@ -552,7 +558,7 @@
                 <span class="nav-link-text">Dashboard</span>
             </a>
 
-            @if(auth()->user()->isAdmin() || auth()->user()->isSales())
+            @if(auth()->user()->isAdmin() || auth()->user()->isManager() || auth()->user()->isSales())
                 <div class="nav-section">Sales Pipeline</div>
                 <a href="{{ route('leads.index') }}" class="nav-link {{ request()->routeIs('leads.*') ? 'active' : '' }}">
                     <i class="bi bi-person-plus-fill"></i>
@@ -580,7 +586,7 @@
                 <span class="nav-link-text">Tasks</span>
             </a>
 
-            @if(auth()->user()->isAdmin() || auth()->user()->isSales())
+            @if(auth()->user()->isAdmin() || auth()->user()->isManager() || auth()->user()->isSales())
                 <div class="nav-section">Finance</div>
                 <a href="{{ route('contracts.index') }}"
                     class="nav-link {{ request()->routeIs('contracts.*') ? 'active' : '' }}">
@@ -599,8 +605,15 @@
                 </a>
             @endif
 
-            @if(auth()->user()->isAdmin())
+            @if(auth()->user()->isAdmin() || auth()->user()->isManager())
                 <div class="nav-section">Admin</div>
+                @if(auth()->user()->isAdmin())
+                <a href="{{ route('users.index') }}"
+                    class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                    <i class="bi bi-person-badge-fill"></i>
+                    <span class="nav-link-text">Users</span>
+                </a>
+                @endif
                 <a href="{{ route('packages.index') }}"
                     class="nav-link {{ request()->routeIs('packages.*') ? 'active' : '' }}">
                     <i class="bi bi-box-fill"></i>
