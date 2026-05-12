@@ -13,20 +13,13 @@ services:
     container_name: lensio_app
     restart: unless-stopped
     ports:
-      - "${APP_PORT:-8080}:80"
+      - "80:80"
+      - "443:443"
     environment:
       APP_NAME: "${APP_NAME:-Lensio}"
       APP_ENV: "${APP_ENV:-production}"
       APP_KEY: "${APP_KEY}"
       APP_DEBUG: "${APP_DEBUG:-false}"
-      APP_URL: "${APP_URL:-http://localhost:8080}"
-
-      DB_CONNECTION: pgsql
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_DATABASE: "${DB_DATABASE:-lensio}"
-      DB_USERNAME: "${DB_USERNAME:-lensio}"
-      DB_PASSWORD: "${DB_PASSWORD:-secret}"
 
       SESSION_DRIVER: database
       CACHE_STORE: database
@@ -60,7 +53,7 @@ services:
     ports:
       - "${DB_EXTERNAL_PORT:-5432}:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-lensio} -d ${DB_DATABASE:-lensio}"]
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USERNAME:-lensio} -d ${DB_DATABASE:-lensio}" ]
       interval: 10s
       timeout: 5s
       retries: 5
