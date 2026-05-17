@@ -14,6 +14,7 @@ services:
     restart: unless-stopped
     ports:
       - "8080:80"
+      - "443:443"
     environment:
       APP_NAME: "${APP_NAME:-Lensio}"
       APP_ENV: "${APP_ENV:-production}"
@@ -38,6 +39,7 @@ services:
       - app_storage:/var/www/html/storage
       - app_bootstrap_cache:/var/www/html/bootstrap/cache
       - ./.env:/var/www/html/.env
+      - ./docker/nginx/ssl:/etc/nginx/ssl:ro
     depends_on:
       postgres:
         condition: service_healthy
