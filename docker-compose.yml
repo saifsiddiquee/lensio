@@ -13,8 +13,7 @@ services:
     container_name: lensio_app
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:80"
     environment:
       APP_NAME: "${APP_NAME:-Lensio}"
       APP_ENV: "${APP_ENV:-production}"
